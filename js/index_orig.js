@@ -60,7 +60,7 @@ function displayBook(book) {
 function updateBookUsers(book) {	
 	for (let i = 0; i < book.users.length; i++) {
 		if (book.users[i].id === 1) {
-			removeUser(book);			
+			alert("You read this already!");
 			return;
 		}
 	}
@@ -70,30 +70,6 @@ function updateBookUsers(book) {
 	
 	book.users.push({"id": 1, "username": "pouros"});
 		
-	const configObj = {
-		method: "PATCH",
-		headers: {
-			"Content-Type": "application/json",
-			"Accept": "application/json"
-		},
-		body: JSON.stringify({users: book.users})
-	};
-	
-	fetch(bookUrl, configObj)
-		.then(response => response.json())
-		.then(json => displayBook(book));
-}
-
-function removeUser(book) {
-	const bookUrl = `http://localhost:3000/books/${book.id}`;
-	const bookUsers = book.users
-	
-	for (let i = 0; i < book.users.length; i++) {		
-		if (book.users[i].id === 1) {
-			book.users.splice(i, 1);
-		}
-	}
-	
 	const configObj = {
 		method: "PATCH",
 		headers: {
